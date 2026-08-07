@@ -514,11 +514,8 @@ Router.register('domino', (app) => {
     dragInfo.ghostEl.style.transform =
       `translate3d(${dx}px, ${dy - 14}px, 0) scale(1.12) rotate(-3deg)`;
 
-    ['dm-drop-left', 'dm-drop-right', 'dm-drop-center'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el || !el.classList.contains('active')) return;
-      el.classList.toggle('hover', dmPointInEl(dragInfo.pendingX, dragInfo.pendingY, el));
-    });
+    const resolved = dmResolveDropSide(dragInfo.pendingX, dragInfo.pendingY);
+    dmHighlightSide(resolved);
   }
 
   function dmDragEnd(e) {
@@ -527,15 +524,7 @@ Router.register('domino', (app) => {
     if (!dragInfo) return;
     if (dragInfo.raf) cancelAnimationFrame(dragInfo.raf);
 
-    let placedSide = null;
-    ['left', 'right', 'center'].forEach(key => {
-      const id = key === 'center' ? 'dm-drop-center' : `dm-drop-${key}`;
-      const el = document.getElementById(id);
-      if (!el || !el.classList.contains('active')) return;
-      if (dmPointInEl(e.clientX, e.clientY, el)) {
-        placedSide = key === 'center' ? 'any' : key;
-      }
-    });
+    const placedSide = dmResolveDropSide(e.clientX, e.clientY);
 
     dragInfo.ghostEl.remove();
     ['dm-drop-left', 'dm-drop-right', 'dm-drop-center'].forEach(id => setZoneActive(id, false));
@@ -548,6 +537,50 @@ Router.register('domino', (app) => {
       if (tile) { playTile(0, tile, placedSide); return; }
     }
     render();
+  }
+
+  // تحديد أي طرف يستهدفه الإصبع بالاعتماد على كامل مساحة الطاولة
+  // بدل صندوق صغير دقيق — عشان المستخدم يشيل إصبعه بأي مكان مناسب
+  // وتروح القطعة تلقائيًا للمكان الصحيح.
+  function dmResolveDropSide(x, y) {
+    const wrap = document.getElementById('dm-board-wrap');
+    if (!wrap) return null;
+    const wrapRect = wrap.getBoundingClientRect();
+    const vPad = 60; // تسامح رأسي فوق وتحت الطاولة
+    if (y < wrapRect.top - vPad || y > wrapRect.bottom + vPad) return null;
+    const hPad = 30;
+    if (x < wrapRect.left - hPad || x > wrapRect.right + hPad) return null;
+
+    const centerEl = document.getElementById('dm-drop-center');
+    if (centerEl && centerEl.classList.contains('active')) return 'any';
+
+    const leftEl = document.getElementById('dm-drop-left');
+    const rightEl = document.getElementById('dm-drop-right');
+    const leftActive = leftEl && leftEl.classList.contains('active');
+    const rightActive = rightEl && rightEl.classList.contains('active');
+    if (!leftActive && !rightActive) return null;
+
+    if (leftActive && rightActive) {
+      const leftRect = leftEl.getBoundingClientRect();
+      const rightRect = rightEl.getBoundingClientRect();
+      const screenLeftIsLeftZone = leftRect.left <= rightRect.left;
+      const divider = wrapRect.left + wrapRect.width / 2;
+      if (x < divider) return screenLeftIsLeftZone ? 'left' : 'right';
+      return screenLeftIsLeftZone ? 'right' : 'left';
+    }
+    return leftActive ? 'left' : 'right';
+  }
+
+  function dmHighlightSide(side) {
+    setHover('dm-drop-left', side === 'left');
+    setHover('dm-drop-right', side === 'right');
+    setHover('dm-drop-center', side === 'any');
+  }
+
+  function setHover(id, on) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('hover', !!on);
   }
 
   function dmPointInEl(x, y, el) {
