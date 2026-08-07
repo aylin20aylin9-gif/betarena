@@ -317,7 +317,7 @@ Router.register('domino', (app) => {
               <div class="dm-drop-zone dm-drop-left" id="dm-drop-left"></div>
               ${st.chain.length === 0
                 ? `<div class="dm-drop-zone dm-drop-center" id="dm-drop-center"></div>`
-                : st.chain.map(t => `<div class="dm-tile dm-tile-board">
+                : st.chain.map((t, i) => `<div class="dm-tile dm-tile-board" style="animation-delay:${(i * 0.14).toFixed(2)}s">
                       <div class="dm-half">${dmPipHTML(t.left)}</div>
                       <div class="dm-divider"></div>
                       <div class="dm-half">${dmPipHTML(t.right)}</div>
