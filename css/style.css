@@ -393,359 +393,321 @@ h1, h2 {
   margin-top: 14px;
 }
 
-/* شاشة تنفيذ الجولة — عجلة روليت حقيقية */
-.wheel-wrap {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 10px auto 0;
+/* ==================== لعبة الدومينو ==================== */
+.dm-page {
+  padding-bottom: 10px;
 }
 
-.wheel {
-  width: 220px;
-  height: 220px;
+.dm-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dm-icon-btn {
+  background: #1a1a1a;
+  border: 1px solid #333;
   border-radius: 50%;
-  border: 6px solid #444;
-  box-shadow: 0 0 0 3px #111, 0 8px 24px rgba(0,0,0,0.5);
-  transform: rotate(0deg);
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.wheel-hub {
+.dm-info-strip {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  background: #14100a;
+  border: 1px solid #3a2f10;
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+
+.dm-info-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+}
+
+.dm-info-label { color: #999; }
+.dm-info-val { font-weight: bold; font-size: 12px; margin-top: 2px; }
+.dm-info-val.gold { color: #ffd166; }
+
+.dm-table {
+  background: #0d3d24;
+  border: 2px solid #6b4a24;
+  border-radius: 16px;
+  padding: 10px 6px;
+  margin-bottom: 10px;
+}
+
+.dm-seat-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.dm-mid-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dm-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 62px;
+  flex-shrink: 0;
+}
+
+.dm-seat-card {
+  background: #14100a;
+  border: 1px solid #3a2f10;
+  border-radius: 10px;
+  padding: 4px 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.dm-seat-card.active-turn {
+  border-color: #ffd166;
+  box-shadow: 0 0 0 1px #ffd166;
+}
+
+.dm-avatar { font-size: 16px; }
+.dm-seat-name { font-size: 10px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dm-seat-score { font-size: 9px; color: #ffd166; }
+.dm-seat-count {
+  font-size: 9px;
+  color: #111;
+  background: #ffd166;
+  border-radius: 8px;
+  padding: 0 5px;
+  display: inline-block;
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+.dm-back-tiles {
+  font-size: 12px;
+  color: #ccc;
+  letter-spacing: -2px;
+  text-align: center;
+}
+
+.dm-board-wrap {
+  flex: 1;
+  overflow-x: auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.dm-board {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 6px 4px;
+}
+
+.dm-board-hint {
+  color: #7fae95;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 30px 10px;
+}
+
+.dm-tile {
+  background: #f4ecd8;
+  border: 1px solid #b8a878;
+  border-radius: 6px;
+  width: 34px;
+  height: 66px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+  cursor: default;
+}
+
+.dm-tile-board {
+  width: 30px;
+  height: 58px;
+}
+
+.dm-half {
+  flex: 1;
+  position: relative;
+}
+
+.dm-divider {
+  height: 1px;
+  background: #b8a878;
+  margin: 0 3px;
+}
+
+.dm-pips {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.dm-dot {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 26px;
-  height: 26px;
-  background: #111;
-  border: 3px solid #ffd166;
+  width: 5px;
+  height: 5px;
+  background: #1a1a1a;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
-.wheel-pointer {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffd166;
-  font-size: 24px;
-  z-index: 5;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+.dm-side-panels {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
-/* شاشة النتيجة */
-.result-icon {
-  font-size: 56px;
-  margin-bottom: 6px;
+.dm-panel {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 8px 10px;
 }
 
-.result-win {
-  color: #4caf50;
-}
-
-.result-lose {
-  color: #ff6b6b;
-}
-
-.result-amount {
-  font-size: 26px;
-  font-weight: bold;
+.dm-panel-title {
+  font-size: 11px;
+  color: #999;
   margin-bottom: 4px;
 }
 
-/* ==================== لعبة الروليت الأوروبية ==================== */
-.rl-page {
-  padding-bottom: 10px;
-}
-
-.rl-top-bar {
+.dm-log {
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 10px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.rl-icon-btn {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.rl-wheel-area {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12px;
-}
-
-/* لوحات المعلومات */
-.rl-info-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.rl-panel {
-  background: #14100a;
-  border: 1px solid #3a2f10;
-  border-radius: 12px;
-  padding: 10px;
-}
-
-.rl-panel-label {
+.dm-log-line {
   font-size: 11px;
-  color: #999;
+  color: #ddd;
 }
 
-.rl-panel-value {
-  font-size: 18px;
+.dm-log-line.dim { color: #666; }
+
+.dm-stock {
+  font-size: 20px;
+  text-align: center;
+  color: #ffd166;
   font-weight: bold;
-  color: #fff;
 }
 
-.rl-panel-value.gold { color: #ffd166; }
-.rl-panel-value.green { color: #4caf50; }
-
-.rl-results-row {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-
-.rl-result-ball {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+.dm-side-chooser {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: bold;
-  color: #fff;
-}
-
-.rl-ball-red { background: #c1272d; }
-.rl-ball-black { background: #1a1a1a; border: 1px solid #444; }
-.rl-ball-green { background: #1f7a3f; }
-
-.rl-stat-bar {
-  display: flex;
-  height: 8px;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 4px;
-  background: #222;
-}
-
-.rl-stat-fill.red { background: #c1272d; }
-.rl-stat-fill.black { background: #555; }
-
-.rl-stat-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: #999;
-  margin-top: 2px;
-}
-
-.red-text { color: #e05a5a; }
-.green-text { color: #4caf50; }
-
-/* طاولة الرهانات */
-.rl-table-scroll {
-  overflow-x: auto;
-  margin-bottom: 12px;
-}
-
-.rl-table {
-  background: #0d3d24;
-  border: 2px solid #ffd166;
+  gap: 8px;
+  background: #14100a;
+  border: 1px solid #ffd166;
   border-radius: 10px;
   padding: 8px;
-  min-width: 460px;
+  margin-bottom: 8px;
+  font-size: 13px;
 }
 
-.rl-num-grid {
-  display: grid;
-  grid-template-columns: 34px 1fr 34px;
-}
-
-.rl-zero {
-  grid-column: 1;
-  grid-row: 1;
-  background: #1f7a3f;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border: 1px solid #0a2818;
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-}
-
-.rl-num-cols {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.rl-num-row {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.rl-num-cell {
-  border: 1px solid #0a2818;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  height: 34px;
-  cursor: pointer;
-  position: relative;
-}
-
-.num-red { background: #c1272d; }
-.num-black { background: #1a1a1a; }
-
-.rl-col2to1 {
-  grid-column: 3;
-  display: flex;
-  flex-direction: column;
-}
-
-.rl-col-bet {
-  height: 34px;
-  border: 1px solid #0a2818;
-  background: #123a26;
-  color: #ffd166;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.rl-dozens, .rl-outside-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) 34px;
-  margin-top: 4px;
-}
-
-.rl-outside-row {
-  grid-template-columns: repeat(6, 1fr) 34px;
-}
-
-.rl-outside {
-  background: #123a26;
-  border: 1px solid #0a2818;
-  color: #fff;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 8px 2px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.rl-red-cell { color: #e05a5a; }
-.rl-black-cell { color: #ccc; }
-
-.rl-bet-badge {
-  position: absolute;
-  bottom: 2px;
-  left: 2px;
+.dm-side-btn {
   background: #ffd166;
   color: #111;
-  font-size: 9px;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 1px #111;
-}
-
-/* الشرائح */
-.rl-chips-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-.rl-chip {
-  flex: 1;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 2px dashed #666;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 11px;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.rl-chip.active {
+.dm-hand-wrap {
+  overflow-x: auto;
+  margin-bottom: 10px;
+  padding: 4px 0;
+}
+
+.dm-hand-row {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  min-width: min-content;
+  padding: 0 4px;
+}
+
+.dm-tile-hand.playable {
   border-color: #ffd166;
-  background: #ffd166;
-  color: #111;
-  border-style: solid;
 }
 
-/* أزرار التحكم */
-.rl-controls-row {
+.dm-tile-hand.muted {
+  opacity: 0.55;
+}
+
+.dm-tile-hand.selected {
+  transform: translateY(-8px);
+  border-color: #4caf50;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.dm-controls-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
   margin-bottom: 10px;
 }
 
-.rl-ctrl-btn {
+.dm-ctrl-btn {
   background: #1a1a1a;
   border: 1px solid #444;
   color: #fff;
-  padding: 10px 4px;
+  padding: 12px 2px;
   border-radius: 8px;
   font-size: 12px;
   cursor: pointer;
 }
 
-.rl-double-btn {
-  border-color: #ffd166;
-  color: #ffd166;
+.dm-ctrl-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.rl-spin-btn {
-  background: #1f7a3f;
-  color: #fff;
-  font-size: 17px;
-}
+.dm-pass-btn { border-color: #c1272d; color: #e05a5a; }
+.dm-send-btn { background: #1f7a3f; border-color: #1f7a3f; color: #fff; font-weight: bold; }
 
-.rl-flash-msg {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #222;
+.dm-match-over {
+  background: #14100a;
   border: 1px solid #ffd166;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 20px;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dm-match-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dm-match-scores {
+  margin-bottom: 14px;
+}
+
+.dm-match-score-row {
+  display: flex;
+  justify-content: space-between;
   font-size: 13px;
-  z-index: 200;
+  padding: 4px 0;
+  border-bottom: 1px solid #2a2a2a;
 }
 
 /* تجاوب إضافي للشاشات الصغيرة جدًا */
@@ -754,4 +716,4 @@ h1, h2 {
     width: 38px;
     height: 48px;
   }
-  }
+}
