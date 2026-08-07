@@ -473,6 +473,8 @@ Router.register('domino', (app) => {
     ghost.style.height = rect.height + 'px';
     ghost.style.zIndex = '999';
     ghost.style.pointerEvents = 'none';
+    ghost.style.willChange = 'transform';
+    ghost.style.transform = 'translate3d(0,-14px,0) scale(1.12) rotate(-3deg)';
     document.body.appendChild(ghost);
 
     tileEl.classList.add('dm-tile-dragging-source');
@@ -481,8 +483,11 @@ Router.register('domino', (app) => {
       tileId,
       sides,
       ghostEl: ghost,
-      offsetX: e.clientX - rect.left,
-      offsetY: e.clientY - rect.top
+      startX: e.clientX,
+      startY: e.clientY,
+      raf: null,
+      pendingX: e.clientX,
+      pendingY: e.clientY
     };
 
     setZoneActive('dm-drop-left', sides.includes('left'));
@@ -495,13 +500,24 @@ Router.register('domino', (app) => {
 
   function dmDragMove(e) {
     if (!dragInfo) return;
-    dragInfo.ghostEl.style.left = (e.clientX - dragInfo.offsetX) + 'px';
-    dragInfo.ghostEl.style.top = (e.clientY - dragInfo.offsetY) + 'px';
+    dragInfo.pendingX = e.clientX;
+    dragInfo.pendingY = e.clientY;
+    if (dragInfo.raf) return;
+    dragInfo.raf = requestAnimationFrame(() => dmDragPaint());
+  }
+
+  function dmDragPaint() {
+    if (!dragInfo) return;
+    dragInfo.raf = null;
+    const dx = dragInfo.pendingX - dragInfo.startX;
+    const dy = dragInfo.pendingY - dragInfo.startY;
+    dragInfo.ghostEl.style.transform =
+      `translate3d(${dx}px, ${dy - 14}px, 0) scale(1.12) rotate(-3deg)`;
 
     ['dm-drop-left', 'dm-drop-right', 'dm-drop-center'].forEach(id => {
       const el = document.getElementById(id);
       if (!el || !el.classList.contains('active')) return;
-      el.classList.toggle('hover', dmPointInEl(e.clientX, e.clientY, el));
+      el.classList.toggle('hover', dmPointInEl(dragInfo.pendingX, dragInfo.pendingY, el));
     });
   }
 
@@ -509,6 +525,7 @@ Router.register('domino', (app) => {
     document.removeEventListener('pointermove', dmDragMove);
     document.removeEventListener('pointerup', dmDragEnd);
     if (!dragInfo) return;
+    if (dragInfo.raf) cancelAnimationFrame(dragInfo.raf);
 
     let placedSide = null;
     ['left', 'right', 'center'].forEach(key => {
