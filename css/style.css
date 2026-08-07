@@ -453,6 +453,301 @@ h1, h2 {
   margin-bottom: 4px;
 }
 
+/* ==================== لعبة الروليت الأوروبية ==================== */
+.rl-page {
+  padding-bottom: 10px;
+}
+
+.rl-top-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.rl-icon-btn {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.rl-wheel-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* لوحات المعلومات */
+.rl-info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.rl-panel {
+  background: #14100a;
+  border: 1px solid #3a2f10;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.rl-panel-label {
+  font-size: 11px;
+  color: #999;
+}
+
+.rl-panel-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rl-panel-value.gold { color: #ffd166; }
+.rl-panel-value.green { color: #4caf50; }
+
+.rl-results-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.rl-result-ball {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rl-ball-red { background: #c1272d; }
+.rl-ball-black { background: #1a1a1a; border: 1px solid #444; }
+.rl-ball-green { background: #1f7a3f; }
+
+.rl-stat-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+  background: #222;
+}
+
+.rl-stat-fill.red { background: #c1272d; }
+.rl-stat-fill.black { background: #555; }
+
+.rl-stat-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.red-text { color: #e05a5a; }
+.green-text { color: #4caf50; }
+
+/* طاولة الرهانات */
+.rl-table-scroll {
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.rl-table {
+  background: #0d3d24;
+  border: 2px solid #ffd166;
+  border-radius: 10px;
+  padding: 8px;
+  min-width: 460px;
+}
+
+.rl-num-grid {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+}
+
+.rl-zero {
+  grid-column: 1;
+  grid-row: 1;
+  background: #1f7a3f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid #0a2818;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.rl-num-cols {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.rl-num-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.rl-num-cell {
+  border: 1px solid #0a2818;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  height: 34px;
+  cursor: pointer;
+  position: relative;
+}
+
+.num-red { background: #c1272d; }
+.num-black { background: #1a1a1a; }
+
+.rl-col2to1 {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.rl-col-bet {
+  height: 34px;
+  border: 1px solid #0a2818;
+  background: #123a26;
+  color: #ffd166;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.rl-dozens, .rl-outside-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 34px;
+  margin-top: 4px;
+}
+
+.rl-outside-row {
+  grid-template-columns: repeat(6, 1fr) 34px;
+}
+
+.rl-outside {
+  background: #123a26;
+  border: 1px solid #0a2818;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 8px 2px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.rl-red-cell { color: #e05a5a; }
+.rl-black-cell { color: #ccc; }
+
+.rl-bet-badge {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  background: #ffd166;
+  color: #111;
+  font-size: 9px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1px #111;
+}
+
+/* الشرائح */
+.rl-chips-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.rl-chip {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed #666;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rl-chip.active {
+  border-color: #ffd166;
+  background: #ffd166;
+  color: #111;
+  border-style: solid;
+}
+
+/* أزرار التحكم */
+.rl-controls-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.rl-ctrl-btn {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 10px 4px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.rl-double-btn {
+  border-color: #ffd166;
+  color: #ffd166;
+}
+
+.rl-spin-btn {
+  background: #1f7a3f;
+  color: #fff;
+  font-size: 17px;
+}
+
+.rl-flash-msg {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  border: 1px solid #ffd166;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 200;
+}
+
 /* تجاوب إضافي للشاشات الصغيرة جدًا */
 @media (max-width: 340px) {
   .otp-inputs input {
