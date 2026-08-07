@@ -485,8 +485,11 @@ h1, h2 {
   margin-top: 10px;
 }
 
-/* شاشة اللعب */
+/* شاشة اللعب — تمتد لتملأ الشاشة كاملة بدل ما تبقى مكدسة بالأعلى */
 .dm-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 32px - 70px);
   padding-bottom: 10px;
 }
 
@@ -531,11 +534,20 @@ h1, h2 {
 
 .dm-table {
   background: #0d3d24;
-  background-image: radial-gradient(ellipse at center, #124d2e 0%, #0a2e1c 100%);
-  border: 3px solid #6b4a24;
-  border-radius: 18px;
-  padding: 10px 6px 6px;
-  margin-bottom: 10px;
+  background-image:
+    radial-gradient(ellipse at center, #135530 0%, #0a2e1c 78%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 5px);
+  border: 4px solid #7a5a2e;
+  border-radius: 20px;
+  padding: 12px 8px 10px;
+  margin-bottom: 12px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 209, 102, 0.18),
+    inset 0 2px 10px rgba(0,0,0,0.55),
+    0 6px 14px rgba(0,0,0,0.5);
 }
 
 .dm-seat-top-row {
@@ -589,7 +601,9 @@ h1, h2 {
 
 .dm-board-wrap {
   overflow-x: auto;
-  min-height: 90px;
+  overflow-y: hidden;
+  flex: 1 1 auto;
+  min-height: 140px;
   display: flex;
   align-items: center;
   position: relative;
@@ -597,10 +611,10 @@ h1, h2 {
 
 .dm-board {
   display: flex;
-  gap: 3px;
+  gap: 4px;
   align-items: center;
   margin: 0 auto;
-  padding: 8px 4px;
+  padding: 8px 6px;
 }
 
 .dm-board-hint {
@@ -618,14 +632,14 @@ h1, h2 {
 /* مناطق إفلات القطعة عند السحب */
 .dm-drop-zone {
   width: 0;
-  height: 58px;
+  height: 66px;
   flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 9px;
   transition: width 0.15s ease;
 }
 
 .dm-drop-zone.active {
-  width: 36px;
+  width: 40px;
   border: 2px dashed #ffd166;
   background: rgba(255, 209, 102, 0.08);
 }
@@ -637,28 +651,47 @@ h1, h2 {
 
 .dm-drop-center.active {
   width: 100%;
-  min-width: 120px;
-  height: 60px;
+  min-width: 130px;
+  height: 68px;
 }
 
-/* قطع الدومينو — شكل واقعي */
+/* قطع الدومينو — عاجية فخمة بحواف بارزة ولمعة كلاسيكية */
 .dm-tile {
-  background: linear-gradient(155deg, #fffdf6 0%, #ece0c4 100%);
-  border: 1px solid #9c8a5e;
-  border-radius: 7px;
-  width: 34px;
-  height: 66px;
+  position: relative;
+  background:
+    linear-gradient(155deg, #ffffff 0%, #fdf8e8 35%, #ecdfb8 78%, #e0cf9e 100%);
+  border: 1px solid #8a774a;
+  border-radius: 9px;
+  width: 40px;
+  height: 78px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -2px 3px rgba(0,0,0,0.12), 0 3px 4px rgba(0,0,0,0.45);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.65),
+    inset 0 2px 1px rgba(255,255,255,0.9),
+    inset 0 -3px 4px rgba(0,0,0,0.18),
+    0 1px 0 rgba(255,255,255,0.25),
+    0 4px 6px rgba(0,0,0,0.4),
+    0 8px 10px rgba(0,0,0,0.25);
   cursor: default;
   touch-action: none;
+  overflow: hidden;
+}
+
+/* لمعة خفيفة أعلى القطعة توحي بسطح عاجي مصقول */
+.dm-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
 }
 
 .dm-tile-board {
-  width: 30px;
-  height: 58px;
+  width: 34px;
+  height: 66px;
 }
 
 .dm-half {
@@ -667,24 +700,29 @@ h1, h2 {
 }
 
 .dm-divider {
-  height: 2px;
-  margin: 0 4px;
-  background: linear-gradient(90deg, transparent, #9c8a5e 20%, #9c8a5e 80%, transparent);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  height: 3px;
+  margin: 0 5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #b08d3e 15%, #8a6a25 50%, #b08d3e 85%, transparent);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 1px rgba(0,0,0,0.25);
 }
 
 .dm-pips {
   position: relative;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 
 .dm-dot {
   position: absolute;
-  width: 5.5px;
-  height: 5.5px;
-  background: radial-gradient(circle at 35% 30%, #444, #000 75%);
+  width: 6.5px;
+  height: 6.5px;
+  background: radial-gradient(circle at 32% 28%, #4a4a4a 0%, #0a0a0a 65%, #000 100%);
   border-radius: 50%;
+  box-shadow:
+    inset 0 1px 1px rgba(0,0,0,0.9),
+    0 1px 0 rgba(255,255,255,0.75);
   transform: translate(-50%, -50%);
 }
 
@@ -748,7 +786,14 @@ h1, h2 {
 }
 
 .dm-tile-hand.playable {
-  border-color: #ffd166;
+  border-color: #d9a637;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.65),
+    inset 0 2px 1px rgba(255,255,255,0.9),
+    inset 0 -3px 4px rgba(0,0,0,0.18),
+    0 0 0 2px rgba(255, 209, 102, 0.35),
+    0 4px 10px rgba(255, 209, 102, 0.25),
+    0 6px 10px rgba(0,0,0,0.4);
   cursor: grab;
 }
 
@@ -765,8 +810,8 @@ h1, h2 {
 }
 
 .dm-tile-ghost {
-  box-shadow: 0 8px 16px rgba(0,0,0,0.6);
-  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.65), 0 0 0 2px rgba(255, 209, 102, 0.5);
+  transform: scale(1.1) rotate(-2deg);
 }
 
 .dm-controls-row-2 {
@@ -777,13 +822,15 @@ h1, h2 {
 }
 
 .dm-ctrl-btn {
-  background: #1a1a1a;
-  border: 1px solid #444;
-  color: #fff;
-  padding: 12px 2px;
-  border-radius: 8px;
+  background: linear-gradient(180deg, #262218 0%, #17140d 100%);
+  border: 1px solid #6b5527;
+  color: #ffd166;
+  padding: 13px 2px;
+  border-radius: 10px;
   font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.4);
 }
 
 .dm-ctrl-btn:disabled {
