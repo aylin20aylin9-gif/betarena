@@ -393,14 +393,44 @@ h1, h2 {
   margin-top: 14px;
 }
 
-/* شاشة تنفيذ الجولة */
-.roulette-wheel {
-  font-size: 60px;
-  margin-bottom: 10px;
+/* شاشة تنفيذ الجولة — عجلة روليت حقيقية */
+.wheel-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 10px auto 0;
 }
 
-.roulette-wheel.spinning {
-  animation: spin 1s linear infinite;
+.wheel {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid #444;
+  box-shadow: 0 0 0 3px #111, 0 8px 24px rgba(0,0,0,0.5);
+  transform: rotate(0deg);
+}
+
+.wheel-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  background: #111;
+  border: 3px solid #ffd166;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffd166;
+  font-size: 24px;
+  z-index: 5;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 
 /* شاشة النتيجة */
