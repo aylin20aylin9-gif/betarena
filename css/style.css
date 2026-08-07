@@ -638,15 +638,29 @@ h1, h2 {
   transition: width 0.15s ease;
 }
 
+@keyframes dm-zone-float {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 rgba(255, 209, 102, 0);
+  }
+  50% {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 14px rgba(255, 209, 102, 0.18);
+  }
+}
+
 .dm-drop-zone.active {
   width: 40px;
   border: 2px dashed #ffd166;
   background: rgba(255, 209, 102, 0.08);
+  animation: dm-zone-float 1.7s ease-in-out infinite;
 }
 
 .dm-drop-zone.hover {
   background: rgba(255, 209, 102, 0.35);
   border-color: #4caf50;
+  animation: none;
+  transform: translateY(-8px) scale(1.06);
 }
 
 .dm-drop-center.active {
