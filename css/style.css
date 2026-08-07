@@ -270,6 +270,159 @@ h1, h2 {
   font-size: 12px;
 }
 
+/* بطاقة اللعب بالصفحة الرئيسية */
+.play-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #2a2410, #1a1a1a);
+  border: 1px solid #3a3320;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.play-card-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.play-card-sub {
+  color: #999;
+  font-size: 13px;
+}
+
+.play-btn {
+  width: auto;
+  padding: 10px 22px;
+}
+
+/* شاشة اختيار اللعبة */
+.points-badge {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.points-value {
+  color: #ffd166;
+  font-weight: bold;
+}
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mode-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 14px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mode-card.active {
+  border-color: #ffd166;
+  background: #241f10;
+}
+
+.mode-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.mode-sub {
+  font-size: 11px;
+  color: #999;
+}
+
+.stake-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stake-chip {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 0;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.stake-chip.active {
+  border-color: #ffd166;
+  background: #ffd166;
+  color: #111;
+}
+
+.round-preview {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #999;
+  padding: 4px 0;
+}
+
+.preview-highlight span {
+  color: #ffd166;
+  font-weight: bold;
+}
+
+.rake-note {
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* شاشة تنفيذ الجولة */
+.roulette-wheel {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.roulette-wheel.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* شاشة النتيجة */
+.result-icon {
+  font-size: 56px;
+  margin-bottom: 6px;
+}
+
+.result-win {
+  color: #4caf50;
+}
+
+.result-lose {
+  color: #ff6b6b;
+}
+
+.result-amount {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
 /* تجاوب إضافي للشاشات الصغيرة جدًا */
 @media (max-width: 340px) {
   .otp-inputs input {
