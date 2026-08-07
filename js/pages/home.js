@@ -11,7 +11,7 @@ Router.register('home', (app) => {
 
     <div class="play-card" id="play-card">
       <div>
-        <div class="play-card-title">🎯 روليت BetArena</div>
+        <div class="play-card-title">🁣 دومينو BetArena</div>
         <div class="play-card-sub">رصيدك: ${user.points} نقطة</div>
       </div>
       <button class="btn play-btn" id="play-btn">العب</button>
@@ -24,7 +24,7 @@ Router.register('home', (app) => {
   `;
 
   document.getElementById('play-btn').addEventListener('click', () => {
-    Router.navigate('roulette');
+    Router.navigate('domino');
   });
 
   const list = document.getElementById('rooms-list');
