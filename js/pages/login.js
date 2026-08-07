@@ -167,6 +167,7 @@ Router.register('login', (app) => {
       phone,
       password, // ملاحظة: تخزين مؤقت محلي فقط، يجب تشفير كلمة المرور عند ربط الباك اند الحقيقي
       wallet: 0,
+      points: 500, // رصيد نقاط ترحيبي للعب داخل التطبيق
       referredBy: referral || null
     };
 

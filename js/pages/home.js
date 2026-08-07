@@ -1,14 +1,31 @@
 Router.register('home', (app) => {
-  const user = Store.get('user', { name: 'مستخدم' });
+  const user = Store.get('user', { name: 'مستخدم', points: 0 });
+  if (typeof user.points !== 'number') {
+    user.points = 500; // رصيد نقاط ترحيبي للمستخدمين الجدد
+    Store.set('user', user);
+  }
   const rooms = Store.get('rooms', []);
 
   app.innerHTML = `
     <h2>مرحبًا، ${user.name}</h2>
+
+    <div class="play-card" id="play-card">
+      <div>
+        <div class="play-card-title">🎯 روليت BetArena</div>
+        <div class="play-card-sub">رصيدك: ${user.points} نقطة</div>
+      </div>
+      <button class="btn play-btn" id="play-btn">العب</button>
+    </div>
+
     <div class="card">
       <p>الغرف المتاحة</p>
     </div>
     <div id="rooms-list"></div>
   `;
+
+  document.getElementById('play-btn').addEventListener('click', () => {
+    Router.navigate('roulette');
+  });
 
   const list = document.getElementById('rooms-list');
   if (rooms.length === 0) {
